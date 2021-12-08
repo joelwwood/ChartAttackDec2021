@@ -36,4 +36,15 @@ can_data %>%
   labs(y="Mt CO2eq",
        title="Canadian Greenhouse Gas Emissions\n 1990-2019",
        caption="Data: Environment and Climate Change Canada, 2021\nNational Inventory Report\nChart: https://github.com/joelwwood/ChartToWatch_Dec2021")
+
+##Export data for Jason Kirby  
+#Long format
+can_data %>%
+  mutate(type=fct_relevel(type, "Old", "New", "CO2eq"))%>%
+  arrange(type) %>%
+  write_csv("data_long.csv")
+#wide format
+left_join(can_ghg_data,can_ghg_2019) %>%
+  write_csv("data_wide.csv")
+
   
